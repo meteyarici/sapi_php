@@ -2,7 +2,7 @@ version: "3"
 services:
 
   php:
-    container_name: .gitignore
+    container_name: sapi_php
     build:
       context: ./php
       dockerfile: Dockerfile
