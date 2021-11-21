@@ -56,5 +56,5 @@ RUN set -xe && \
        ${PWD}/v${PHALCON_VERSION}.tar.gz \
        ${PWD}/cphalcon-${PHALCON_VERSION} \
    && \
+   composer install
    php -m \
-   composer install --no-dev --no-interaction -o
