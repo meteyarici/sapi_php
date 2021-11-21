@@ -1,0 +1,19 @@
+{
+  "name": "phalcon/blog",
+  "description": "Phalcon project!",
+  "license": "proprietary",
+  "require": {
+    "php": "^7.4",
+    "phalcon/devtools": "v4.0.3",
+    "phalcon/cphalcon": "4.0.6",
+    "firebase/php-jwt": "^5.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.0"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests"
+    }
+  }
+}

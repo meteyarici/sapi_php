@@ -1,0 +1,71 @@
+version: "3"
+services:
+
+  php:
+    container_name: .gitignore
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+      args:
+        - WITH_XDEBUG=true
+    working_dir: /var/www/html
+    volumes:
+      - ./php/asset/timezone.ini:/usr/local/etc/php/conf.d/timezone.ini
+      - ./php/asset/file.ini:/usr/local/etc/php/conf.d/file.ini
+      - ./phalcon:/var/www/html:rw
+    command: bash -c "php-fpm"
+    restart: always
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "3"
+
+  nginx:
+    container_name: sapi_nginx
+    image: nginx:1.17.8
+    command: ["nginx", "-g", "daemon off;"]
+    working_dir: /var/www/html
+    depends_on:
+      - php
+      - db
+    volumes:
+      - ./nginx/asset/:/etc/nginx/conf.d/
+      - ./nginx/log:/var/log/nginx/:rw
+      - ./phalcon:/var/www/html:rw
+    ports:
+      - "80:80"
+    links:
+      - php
+    restart: always
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "3"
+
+  redis:
+    container_name: sapi_redis
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6379"
+
+  db:
+    container_name: sapi_db
+    image: mariadb:10.3
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: app
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    container_name: sapi_phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
