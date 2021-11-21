@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "1045a3a1-ed8f-4e78-88ae-1897d53369bd",
+		"name": "sapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost/api/authenticate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "customer1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "appToken",
+							"value": "4e6a48506bfcc3da281f9769728137f0",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/authenticate",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/api/orders/create",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjEiLCJ1c2VybmFtZSI6ImN1c3RvbWVyMSIsInVzZXJSb2xlIjoidXNlciIsImlhdCI6MTYzNzUyNzE1MSwiZXhwIjoxNjM3NTMwNzUxfQ.EWS7CHbtOpfZ6acqf0KzmFN8VgsQA5UFBXjOOZZDOgw",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "orderCode",
+							"value": "a112",
+							"type": "text"
+						},
+						{
+							"key": "productid",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "asdasdas",
+							"type": "text"
+						},
+						{
+							"key": "shippingDate",
+							"value": "123123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/orders/create",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"orders",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/api/orders/detail/a112",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjEiLCJ1c2VybmFtZSI6ImN1c3RvbWVyMSIsInVzZXJSb2xlIjoidXNlciIsImlhdCI6MTYzNzUyNzE1MSwiZXhwIjoxNjM3NTMwNzUxfQ.EWS7CHbtOpfZ6acqf0KzmFN8VgsQA5UFBXjOOZZDOgw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "orderCode",
+							"value": "a112",
+							"type": "text"
+						},
+						{
+							"key": "productid",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "değiştirilen adres",
+							"type": "text"
+						},
+						{
+							"key": "shippingDate",
+							"value": "123123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/orders/detail/a112",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"orders",
+						"detail",
+						"a112"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/api/orders/list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "orderCode",
+							"value": "a112",
+							"type": "text"
+						},
+						{
+							"key": "productid",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "değiştirilen adres",
+							"type": "text"
+						},
+						{
+							"key": "shippingDate",
+							"value": "123123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/orders/list",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"orders",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/api/orders/detail/a112",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "orderCode",
+							"value": "a112",
+							"type": "text"
+						},
+						{
+							"key": "productid",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "değiştirilen adres",
+							"type": "text"
+						},
+						{
+							"key": "shippingDate",
+							"value": "123123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/orders/detail/a112",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"orders",
+						"detail",
+						"a112"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
