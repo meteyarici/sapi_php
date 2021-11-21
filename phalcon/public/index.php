@@ -1,4 +1,5 @@
 <?php
+
 use Phalcon\Mvc\Micro;
 use Phalcon\Http\Response;
 use Phalcon\Session\Adapter\Redis;
@@ -38,9 +39,7 @@ $app = new Micro($di);
 $app->before(function () use ($app, $di) {
 
     $authService = $di->get('authService');
-
-    // first check some allowed routes for which authentication is not required
-    $allowedRoutes = ['/api/authenticate', '/api/create_user', '/api/get_user', '/api/auth_fail'];
+    $allowedRoutes = ['/api/authenticate', '/api/auth_fail'];
     $currentRouteName = $di->get('router')->getMatchedRoute()->getCompiledPattern();
     foreach ($allowedRoutes as $allowedRoute) {
         if ($currentRouteName == $allowedRoute) {
@@ -49,9 +48,8 @@ $app->before(function () use ($app, $di) {
     }
 
     if (!$authService->isAuthenticated()) {
-        // process error (output some authentication-related json response here)
-        $app->stop();
 
+        $app->stop();
         $app->response->redirect("/api/auth_fail")->sendHeaders();
 
         return false;
@@ -67,9 +65,6 @@ $app->post('/api/authenticate', function () use ($config, $di, $app) {
 
     $username = $this->request->getPost("username");
     $password = $this->request->getPost("password");
-
-    //$r['username'] = 'mete';
-    //$r['password'] = '1234';
 
     $users = new Users();
     $user = $users->findFirst([
@@ -163,7 +158,7 @@ $app->post('/api/orders/create', function () use ($config, $di, $app) {
 });
 
 /**
- *  @return json
+ * @return json
  */
 $app->post('/api/orders/update', function () use ($config, $di, $app) {
 
@@ -181,7 +176,7 @@ $app->post('/api/orders/update', function () use ($config, $di, $app) {
     ]);
 
     $date = new \DateTime();
-    if($order->shippingDate < $date->getTimestamp()){
+    if ($order->shippingDate < $date->getTimestamp()) {
         $result = [
             'status' => 'error',
             'message' => 'Order time has passed!'
@@ -225,7 +220,7 @@ $app->post('/api/orders/update', function () use ($config, $di, $app) {
 });
 
 /**
- *  @return json
+ * @return json
  */
 $app->get(
     '/api/orders/list',
@@ -234,7 +229,7 @@ $app->get(
         $orders = new Orders();
         $list = $orders->find([
             'conditions' => 'owner = :owner:',
-            'bind'       => [
+            'bind' => [
                 'owner' => '1',
             ]
         ]);
@@ -247,7 +242,7 @@ $app->get(
 );
 
 /**
- *  @return json
+ * @return json
  */
 $app->get(
     '/api/orders/detail/{orderCode}',
@@ -255,7 +250,7 @@ $app->get(
         $orders = new Orders();
         $list = $orders->find([
             'conditions' => 'orderCode = :orderCode: AND owner = :owner:',
-            'bind'       => [
+            'bind' => [
                 'orderCode' => $orderCode,
                 'owner' => '1',
             ]
@@ -267,7 +262,7 @@ $app->get(
 );
 
 /**
- *  @return json
+ * @return json
  */
 $app->get('/api/auth_fail', function () use ($config, $di) {
     $result = [
